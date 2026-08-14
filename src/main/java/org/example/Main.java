@@ -1,17 +1,23 @@
 package org.example;
 
+import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.model.openai.OpenAiChatModel;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        System.out.println("Welcome to LangChain4j");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        ChatModel chatModel = OpenAiChatModel.builder()
+                .baseUrl("https://api.groq.com/openai/v1/")
+                .apiKey(System.getenv("GROQ_API_KEY"))
+                .modelName("llama-3.1-8b-instant")
+                .build();
+
+        String answer = chatModel.chat("hello , tell me who is viladimir putin");
+        System.out.println(answer);
+
+
     }
 }
